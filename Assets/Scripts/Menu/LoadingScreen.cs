@@ -45,6 +45,5 @@ public class LoadingScreen : MonoBehaviour
             yield return null;
         }
         Utility.SetCanvasGroupEnabled(canvasGroup, false);
-        AudioSingletone.instance.SwitchMusic("GameMusic");
     }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed442a2e1a6ea344db65a50dbc119da6, type: 3}
+  m_Name: MInigun_1
+  m_EditorClassIdentifier: 
+  towerName: Minigun
+  levelOfTower: 1
+  towerCost: 100
+  damage: 2
+  fireRate: 0.2
+  bulletSpeed: 0.2
+  colliderRadius: 3
+  towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a, type: 3}
+  sprite: {fileID: 0}
+  nextTowerForUpgrade: {fileID: 11400000, guid: c0c097ca52d968b47bac3f4d2725844a, type: 2}

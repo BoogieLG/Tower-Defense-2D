@@ -11,4 +11,8 @@ public class Enemies : ScriptableObject
     public int Reward;
     public float Health;
     public float MovementSpeed;
+    public EnemyType enemyType;
+
+
 }
+public enum EnemyType { simple, heavy };

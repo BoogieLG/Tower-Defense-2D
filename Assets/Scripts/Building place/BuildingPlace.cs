@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class BuildingPlace : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] List<Towers> towers;
     [SerializeField] StatsComponent spawnedTower;
     public StatsComponent SpawnedTower => spawnedTower;
     private UINode nodeUI;
@@ -24,23 +23,19 @@ public class BuildingPlace : MonoBehaviour, IPointerClickHandler
         nodeUI.Choosed(this, placeEmpty ? "TowerBuyWindow" : "TowerModifyWindow");
     }
 
-    public void BuildTower(string towersName)
+    public void BuildTower(Towers tower)
     {
-        foreach (Towers tower in towers)
-        {
-            if (tower.towerName == towersName)
-            {
+      
                 if(!CheckIfEnoughMoney(tower)) return;
                 if (spawnedTower != null) Destroy(spawnedTower.gameObject);
-                Vector3 pos = new Vector3(transform.position.x, 0.5f, transform.position.z);
+                Vector3 pos = new Vector3(transform.position.x, transform.position.y, -0.5f);
                 GameObject temp = Instantiate(tower.towerToSpawn,pos,Quaternion.identity);
                 temp.GetComponent<ControllerComponent>().Init(tower);
                 spawnedTower = temp.GetComponent<StatsComponent>();
                 ResourceManagment.instance.UseMoney(spawnedTower);
                 placeEmpty = false;
                 nodeUI.CloseAllWindows();
-            }
-        }
+
     }
 
     public bool CheckIfEnoughMoney(Towers tower)

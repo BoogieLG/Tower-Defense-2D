@@ -6,12 +6,9 @@ public class ControllerComponent : MonoBehaviour
 {
     [SerializeField] private AttackComponent attackComponent;
     [SerializeField] private HealthComponent currentTarget;
-    [SerializeField] private RotationComponent rotationComponent;
     [SerializeField] private ColliderComponent colliders;
     [SerializeField] private StatsComponent statsComponent;
-    [SerializeField] private CapsuleCollider capsuleCollider;
-
-
+    [SerializeField] private CircleCollider2D circleCollider;
     private void Start()
     {
         attackComponent.OnMakingAttack += playFireSound;
@@ -23,15 +20,15 @@ public class ControllerComponent : MonoBehaviour
     public void Init(Towers tower)
     {
         statsComponent.Initiation(tower);
-        attackComponent.Init(statsComponent.Damage);
-        capsuleCollider.radius = statsComponent.ColliderRadius;
+        attackComponent.Init(statsComponent.Damage, statsComponent.BulletSpeed,statsComponent.FireRate);
+        circleCollider.radius = statsComponent.ColliderRadius;
     }
     private void playFireSound()
     {
        if(AudioSingletone.instance) AudioSingletone.instance.PlaySound("MiniganShoot");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (colliders.CollidersInRadius.Count == 0) return;
         else if (currentTarget == null)
@@ -40,7 +37,6 @@ public class ControllerComponent : MonoBehaviour
         }
         if (currentTarget != null)
         {
-            rotationComponent.lookAtEnemy(currentTarget.transform);
             attackComponent.ApplyDamage(currentTarget);
         }
     }

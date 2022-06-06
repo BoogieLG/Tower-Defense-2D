@@ -3,82 +3,84 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 public class WaveSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject enemyToSpawn;
-    [SerializeField] private Waypoints waypoints;
+    [SerializeField] private Transform enemiesPanel;
+    [SerializeField] private Waypoints wayPath;
     [SerializeField] private float countdown;
     [SerializeField] private float timeBetweenWaves;
-    [SerializeField] private float timeBettwenSpawnEnemies;
-    [SerializeField] private int maxWawes;
     [SerializeField] private Text timeCountWave;
-    [SerializeField] private List<Enemies> enemies;
-    [SerializeField] private List<Enemies> enemiesToSpawn;
+    [SerializeField] private Text wavesCount;
 
+    [SerializeField] private List<Wave> waves;
     private int currentWave;
+    private bool nextWave;
 
 
     private void Start()
     {
         currentWave = 0;
+        nextWave = true;
     }
 
     void Update()
     {
-        if (currentWave == maxWawes)
+        if (currentWave == waves.Count)
         {
             timeCountWave.text = "Last wave!";
             return;
         }
         if (countdown <= 0f)
         {
+            if (!nextWave) return;
             spawnNextWave();
+            nextWave = false;
             countdown = timeBetweenWaves;
         }
-        timeCountWave.text ="Next Wave in " + Mathf.Round(countdown).ToString();
+        timeCountWave.text = "Next Wave in " + Mathf.Round(countdown).ToString();
         countdown -= Time.deltaTime;
     }
 
     private void spawnNextWave()
     {
-
-        if (currentWave <= maxWawes-1)
+        if (currentWave <= waves.Count-1)
         {
-            currentWave++;
-            StartCoroutine(spawnNextEnemy());
-            Debug.Log($"Wave #{currentWave}");
+            StartCoroutine(spawnNextEnemy(waves[currentWave]));
         }
+        currentWave++;
+        changeInfo();
 
     }
 
-    IEnumerator spawnNextEnemy()
+    IEnumerator spawnNextEnemy(Wave wave)
     { 
-        foreach(Enemies enemy in enemiesToSpawn)
+
+        foreach(Enemies enemy in wave.enemies)
         {
             GameObject tempEnemy = Instantiate(enemyToSpawn);
-            tempEnemy.GetComponent<EnemyStatsComponent>().Init(enemy,waypoints);
-            yield return new WaitForSeconds(timeBettwenSpawnEnemies);
+            tempEnemy.GetComponent<EnemyStatsComponent>().Init(enemy,wayPath);
+            tempEnemy.transform.SetParent(enemiesPanel);
+            changeInfo();
+            yield return new WaitForSeconds(wave.TimeBetweenSpawn);
 
         }
-        addNewEnemiesToWave(currentWave);
+        nextWave = true;
         StopCoroutine("spawnNextEnemy");
     }
 
-    private void addNewEnemiesToWave(int currentWave)
+    private void changeInfo()
     {
-        switch (currentWave)
-        {
-            case 1:
-                enemiesToSpawn.Add(enemies[0]);
-                break;
-            case 2:
-                enemiesToSpawn.Add(enemies[0]);
-                enemiesToSpawn.Add(enemies[0]);
-                break;
-            default:
-                enemiesToSpawn.Add(enemies[0]);
-                break;
-        }
+        wavesCount.text = $"{currentWave} / {waves.Count}";
     }
+}
+
+[Serializable]
+public class Wave
+{
+    public float TimeBetweenSpawn;
+    public List<Enemies> enemies;
 }

@@ -1,23 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UINode : MonoBehaviour
 {
-    [SerializeField] Transform objTransform;
+    [SerializeField] List<Towers> towers;
+
     [SerializeField] GameObject TowerBuyWindow;
     [SerializeField] GameObject TowerModifyWindow;
     [SerializeField] GameObject CloseButtonCanvas;
 
-    [SerializeField] Text towerInfo;
-    [SerializeField] Text sellButtonInfo;
-    [SerializeField] Text buyButtonInfo;
-    [SerializeField] Text modifyButtonInfo;
+    [SerializeField] Text towerName;
+    [SerializeField] Text towerStats;
+    [SerializeField] Text modifyButton;
+    [SerializeField] Text sellButton;
+
 
     private BuildingPlace currentBuildingPlace;
     public void Choosed(BuildingPlace gameObject, string windowName)
     {
         currentBuildingPlace = gameObject;
-        objTransform.position = gameObject.GetComponent<Transform>().position;
         Init(windowName);
         CloseButtonCanvas.SetActive(true);
     }
@@ -31,11 +33,11 @@ public class UINode : MonoBehaviour
     }
     public void BuildMinigun()
     {
-        currentBuildingPlace.BuildTower("Minigun-1");
+        currentBuildingPlace.BuildTower(towers[0]);
     }
     public void BuildRocketLauncher()
     {
-        currentBuildingPlace.BuildTower("RocketLauncher-1");
+        currentBuildingPlace.BuildTower(towers[1]);
     }
     public void SellTower()
     {
@@ -50,7 +52,7 @@ public class UINode : MonoBehaviour
             CloseAllWindows();
             return;
         }
-        string nextTower = currentBuildingPlace.SpawnedTower.TowerToUpgrade.towerName;
+        Towers nextTower = currentBuildingPlace.SpawnedTower.TowerToUpgrade;
         currentBuildingPlace.BuildTower(nextTower);
         CloseAllWindows();
     }
@@ -60,7 +62,6 @@ public class UINode : MonoBehaviour
         if (windowName == "TowerModifyWindow")
         {
             TowerModifyWindow.SetActive(true);
-            Button modifyBtn = modifyButtonInfo.GetComponentInParent<Button>();
             changeTextInfo();
         }
     }
@@ -69,22 +70,23 @@ public class UINode : MonoBehaviour
     {
 
         StatsComponent towerTemp = currentBuildingPlace.SpawnedTower.GetComponent<StatsComponent>();
-        towerInfo.text =
-            $"Tower info:" +
-            $"Tower: {towerTemp.TowerName}\n" +
-            $"Description: {towerTemp.ShortDiscription}\n" +
+
+        towerName.text = towerTemp.TowerName;
+        towerStats.text =
+            $"Level: {towerTemp.LevelOfTower}\n" +
             $"Price: {towerTemp.Cost}\n" +
             $"Damage: {towerTemp.Damage}\n" +
-            $"Fire rate: {towerTemp.FireRate}\n" +
+            $"Fire rate: {towerTemp.FireRate} +  \n" +
             $"Tower radius: {towerTemp.ColliderRadius}";
-        sellButtonInfo.text = "Sell for: " + towerTemp.SellingCost;
+        
+        sellButton.text = "Sell for: " + towerTemp.Cost;
         if(towerTemp.TowerToUpgrade == null)
         {
-            modifyButtonInfo.text = "No more Upgrade";
+            modifyButton.text = "No more Upgrade";
         }
         else
         {
-            modifyButtonInfo.text = towerTemp.TowerToUpgrade.towerCost.ToString();
+            modifyButton.text = $"Upgrade tower for:  <color=green>{towerTemp.TowerToUpgrade.towerCost}</color>";
         }
     }
 

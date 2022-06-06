@@ -17,7 +17,7 @@ public class HealthBarComponent : MonoBehaviour
     {
         healthComponent.OnChangeHealth -= setImage;
     }
-    private void setImage (float maxHealth, float currentHealth)
+    private void setImage(float maxHealth, float currentHealth)
     {
         healthBar.fillAmount = currentHealth / maxHealth;
     }
