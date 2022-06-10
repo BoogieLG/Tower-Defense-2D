@@ -62,7 +62,7 @@ public class WaveSpawn : MonoBehaviour
         foreach(Enemies enemy in wave.enemies)
         {
             GameObject tempEnemy = Instantiate(enemyToSpawn);
-            tempEnemy.GetComponent<EnemyStatsComponent>().Init(enemy,wayPath);
+            tempEnemy.GetComponent<EnemyController>().Init(enemy,wayPath);
             tempEnemy.transform.SetParent(enemiesPanel);
             changeInfo();
             yield return new WaitForSeconds(wave.TimeBetweenSpawn);

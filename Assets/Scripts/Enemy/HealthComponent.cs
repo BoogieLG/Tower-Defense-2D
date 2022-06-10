@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] EnemyStatsComponent enemyStatsComponent;
     [SerializeField] private float currentHealth;
     public float CurrentHealth => currentHealth;
 
@@ -30,12 +29,8 @@ public class HealthComponent : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            OnDeath?.Invoke(this);
             Destroy(gameObject);
         }
-    }
-    private void OnDestroy()
-    {
-        OnDeath?.Invoke(this);
-        enemyStatsComponent.EarnMoney();
     }
 }

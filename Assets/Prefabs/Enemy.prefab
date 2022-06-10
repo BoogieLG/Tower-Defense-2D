@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 4149977532073064912}
   - component: {fileID: 3287861605147922740}
   - component: {fileID: 4727403289576759908}
-  - component: {fileID: 1338145826954054301}
-  - component: {fileID: 2893310317210792517}
   - component: {fileID: 8081382812703504930}
   - component: {fileID: 8486876005974602852}
   - component: {fileID: 5958394519706286817}
-  m_Layer: 6
+  - component: {fileID: 200505986717037502}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,40 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917dfdf793422184c8a4368835b3cdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStatsComponent: {fileID: 1338145826954054301}
   currentHealth: 0
   maxHealth: 1
---- !u!114 &1338145826954054301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4634776521569973823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36c2d0bb0d83e894a8dd6425d28680cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthComponent: {fileID: 4727403289576759908}
-  movementComponent: {fileID: 3287861605147922740}
-  attackComponent: {fileID: 2893310317210792517}
---- !u!114 &2893310317210792517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4634776521569973823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34a763e03c4560409144bfa305b154c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  bulletSpeed: 0
-  fireRate: 0
-  partical: {fileID: 0}
 --- !u!50 &8081382812703504930
 Rigidbody2D:
   serializedVersion: 4
@@ -189,7 +156,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a5097dfe4a2127840b16dbc6285e7bd2, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a5097dfe4a2127840b16dbc6285e7bd2,
+    type: 3}
   m_Color: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,6 +168,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &200505986717037502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634776521569973823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc80a80932a559c4c8958dd6e818a80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthComponent: {fileID: 4727403289576759908}
+  movementComponent: {fileID: 3287861605147922740}
+  attackComponent: {fileID: 0}
 --- !u!1 &7220701894712466219
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +194,7 @@ GameObject:
   - component: {fileID: 1617762578491326307}
   - component: {fileID: 2390366026337158385}
   - component: {fileID: 8579473091909541620}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +248,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a5097dfe4a2127840b16dbc6285e7bd2, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a5097dfe4a2127840b16dbc6285e7bd2,
+    type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

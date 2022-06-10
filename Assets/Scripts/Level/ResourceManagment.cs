@@ -21,21 +21,21 @@ public class ResourceManagment : MonoBehaviour
         UpdateInfo();
     }
 
-    public void EarnReward(EnemyStatsComponent enemyStatsComponent)
+    public void EarnReward(EnemyController enemyStatsComponent)
     {
         money += enemyStatsComponent.EnemiesStats.Reward;
         UpdateInfo();
     }
 
-    public void UseMoney(StatsComponent statsComponent)
+    public void UseMoney(ControllerComponent controllerComponent)
     {
-        if (money >= statsComponent.Cost) money -= statsComponent.Cost;
+        if (money >= controllerComponent.Tower.towerCost) money -= controllerComponent.Tower.towerCost;
         UpdateInfo();
     } 
 
-    public void SellTower(StatsComponent statsComponent)
+    public void SellTower(ControllerComponent controllerComponent)
     {
-        money += statsComponent.Cost;
+        money += controllerComponent.Tower.towerCost;
         UpdateInfo();
     }
     private void UpdateInfo()

@@ -15,6 +15,7 @@ public class UINode : MonoBehaviour
     [SerializeField] Text modifyButton;
     [SerializeField] Text sellButton;
 
+    [SerializeField] List<Text> buyButtons;
 
     private BuildingPlace currentBuildingPlace;
     public void Choosed(BuildingPlace gameObject, string windowName)
@@ -31,13 +32,12 @@ public class UINode : MonoBehaviour
         CloseButtonCanvas.SetActive(false);
         currentBuildingPlace = null;
     }
-    public void BuildMinigun()
+    public void BuildTower(Text obj)
     {
-        currentBuildingPlace.BuildTower(towers[0]);
-    }
-    public void BuildRocketLauncher()
-    {
-        currentBuildingPlace.BuildTower(towers[1]);
+        string nameOfTower = obj.text;
+        Towers tower = towers.Find(x => x.towerName == nameOfTower);
+        if (tower == null) return;
+        currentBuildingPlace.BuildTower(tower);
     }
     public void SellTower()
     {
@@ -46,48 +46,64 @@ public class UINode : MonoBehaviour
     }
     public void UpgradeTower()
     {
-        if (currentBuildingPlace.SpawnedTower.TowerToUpgrade == null)
+        if (currentBuildingPlace.SpawnedTower.Tower.nextTowerForUpgrade == null)
         {
             Debug.Log("No more upgrades");
             CloseAllWindows();
             return;
         }
-        Towers nextTower = currentBuildingPlace.SpawnedTower.TowerToUpgrade;
+        Towers nextTower = currentBuildingPlace.SpawnedTower.Tower.nextTowerForUpgrade;
         currentBuildingPlace.BuildTower(nextTower);
         CloseAllWindows();
     }
     private void Init(string windowName)
     {
-        TowerBuyWindow.SetActive(windowName == "TowerBuyWindow");
+        if (windowName == "TowerBuyWindow") 
+        {
+            TowerBuyWindow.SetActive(true);
+            changeBuyInfo();
+
+        }
         if (windowName == "TowerModifyWindow")
         {
             TowerModifyWindow.SetActive(true);
-            changeTextInfo();
+            changeModifyInfo();
         }
     }
 
-    private void changeTextInfo() // TODO Необхідно придумати кращу версію відображення інформації про башню
+    private void changeModifyInfo() // TODO Необхідно придумати кращу версію відображення інформації про башню
     {
 
-        StatsComponent towerTemp = currentBuildingPlace.SpawnedTower.GetComponent<StatsComponent>();
+        Towers towerTemp = currentBuildingPlace.SpawnedTower.GetComponent<ControllerComponent>().Tower;
 
-        towerName.text = towerTemp.TowerName;
+        towerName.text = towerTemp.towerName;
         towerStats.text =
-            $"Level: {towerTemp.LevelOfTower}\n" +
-            $"Price: {towerTemp.Cost}\n" +
-            $"Damage: {towerTemp.Damage}\n" +
-            $"Fire rate: {towerTemp.FireRate} +  \n" +
-            $"Tower radius: {towerTemp.ColliderRadius}";
-        
-        sellButton.text = "Sell for: " + towerTemp.Cost;
-        if(towerTemp.TowerToUpgrade == null)
+            $"Level: {towerTemp.levelOfTower}\n" +
+            $"Price: {towerTemp.towerCost}\n" +
+            $"Damage: {towerTemp.damage}\n" +
+            $"Fire rate: {towerTemp.fireRate} \n" +
+            $"Tower radius: {towerTemp.colliderRadius}";
+
+        sellButton.text = "Sell for: " + towerTemp.towerCost;
+        if (towerTemp.nextTowerForUpgrade == null)
         {
             modifyButton.text = "No more Upgrade";
         }
         else
         {
-            modifyButton.text = $"Upgrade tower for:  <color=green>{towerTemp.TowerToUpgrade.towerCost}</color>";
+            modifyButton.text = $"Upgrade tower for:  <color=green>{towerTemp.nextTowerForUpgrade.towerCost}</color>";
         }
     }
-
+    private void changeBuyInfo()
+    {
+        foreach(Text text in buyButtons)
+        {
+            text.transform.parent.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < towers.Count ; i++)
+        {
+            buyButtons[i].transform.parent.gameObject.SetActive(true);
+            buyButtons[i].text = towers[i].towerName/* + "\n" + $"<color=green> {towers[i].towerCost} </color>"*/;
+        }
+    }
 }

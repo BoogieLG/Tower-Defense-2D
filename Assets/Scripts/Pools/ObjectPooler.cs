@@ -46,8 +46,9 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, HealthComponent target, AttackComponent attack)
+    public GameObject SpawnFromPool(BulletType bulletType, Vector3 position, HealthComponent target, AttackComponent attack)
     {
+        string tag = bulletType.ToString();
         if (!poolDictionary.ContainsKey(tag))
         {
             Debug.LogError("Pool with tag " + tag + "doesn't exist");
@@ -63,4 +64,9 @@ public class ObjectPooler : MonoBehaviour
 
         return objectToSpawn;
     }
+}
+public enum BulletType
+{
+    Fast,
+    Rocket
 }

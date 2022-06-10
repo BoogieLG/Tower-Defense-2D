@@ -9,8 +9,11 @@ public class Towers : ScriptableObject
     public float damage;
     public float fireRate;
     public float bulletSpeed;
+    public BulletType bulletType;
     public float colliderRadius;
     public GameObject towerToSpawn;
     public Sprite sprite;
     public Towers nextTowerForUpgrade;
+    public AudioClip audioMakeFire;
+    public ParticleSystem fireEffect;
 }

@@ -16,9 +16,12 @@ MonoBehaviour:
   levelOfTower: 1
   towerCost: 100
   damage: 2
-  fireRate: 0.2
+  fireRate: 300
   bulletSpeed: 0.2
   colliderRadius: 3
-  towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a, type: 3}
+  towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a,
+    type: 3}
   sprite: {fileID: 0}
-  nextTowerForUpgrade: {fileID: 11400000, guid: c0c097ca52d968b47bac3f4d2725844a, type: 2}
+  nextTowerForUpgrade: {fileID: 11400000, guid: c0c097ca52d968b47bac3f4d2725844a,
+    type: 2}
+  audioMakeFire: {fileID: 8300000, guid: d440c9f7407a04474bf738520785306b, type: 3}

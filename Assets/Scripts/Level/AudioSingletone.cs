@@ -44,6 +44,11 @@ public class AudioSingletone : MonoBehaviour
         if (soundSource) soundSource.Play();
     }
 
+    public void PlaySound(AudioClip audio)
+    {
+        soundSource.clip = audio;
+        if (soundSource) soundSource.Play();
+    }
 
 }
 

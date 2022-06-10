@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed442a2e1a6ea344db65a50dbc119da6, type: 3}
-  m_Name: Minigun_2
+  m_Name: Rocket_1
   m_EditorClassIdentifier: 
-  towerName: Minigun
-  levelOfTower: 2
+  towerName: Rocket_1
+  levelOfTower: 1
   towerCost: 200
-  damage: 4
-  fireRate: 300
-  bulletSpeed: 0.2
-  colliderRadius: 3
+  damage: 50
+  fireRate: 30
+  bulletSpeed: 0.05
+  bulletType: 1
+  colliderRadius: 9
   towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a,
     type: 3}
   sprite: {fileID: 0}
-  nextTowerForUpgrade: {fileID: 11400000, guid: c6f90265b856e1c4ba002593cc0861b0,
-    type: 2}
-  audioMakeFire: {fileID: 8300000, guid: d440c9f7407a04474bf738520785306b, type: 3}
+  nextTowerForUpgrade: {fileID: 0}
+  audioMakeFire: {fileID: 8300000, guid: ce02cc583b9d84102a12a156e90ca692, type: 3}
+  fireEffect: {fileID: 0}

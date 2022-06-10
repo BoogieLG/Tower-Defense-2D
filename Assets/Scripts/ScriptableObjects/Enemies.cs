@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObjects/Enemies", order = 1)]
 public class Enemies : ScriptableObject
@@ -12,7 +13,6 @@ public class Enemies : ScriptableObject
     public float Health;
     public float MovementSpeed;
     public EnemyType enemyType;
-
-
+    public Image image;
 }
 public enum EnemyType { simple, heavy };

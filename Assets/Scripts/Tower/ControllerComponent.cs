@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class ControllerComponent : MonoBehaviour
 {
+    [SerializeField] private Towers tower;
+    public Towers Tower => tower;
+
     [SerializeField] private AttackComponent attackComponent;
     [SerializeField] private HealthComponent currentTarget;
     [SerializeField] private ColliderComponent colliders;
-    [SerializeField] private StatsComponent statsComponent;
     [SerializeField] private CircleCollider2D circleCollider;
     private void Start()
     {
-        attackComponent.OnMakingAttack += playFireSound;
         colliders.OnRemovedFromList += checkTarget;
         colliders.OnChangedList += checkList;
 
     }
+    private void OnDestroy()
+    {
+        colliders.OnRemovedFromList -= checkTarget;
+        colliders.OnChangedList -= checkList;
+    }
 
     public void Init(Towers tower)
     {
-        statsComponent.Initiation(tower);
-        attackComponent.Init(statsComponent.Damage, statsComponent.BulletSpeed,statsComponent.FireRate);
-        circleCollider.radius = statsComponent.ColliderRadius;
+        this.tower = tower;
+        attackComponent.Init(tower);
+        circleCollider.radius = tower.colliderRadius;
     }
-    private void playFireSound()
-    {
-       if(AudioSingletone.instance) AudioSingletone.instance.PlaySound("MiniganShoot");
-    }
-
     private void Update()
     {
         if (colliders.CollidersInRadius.Count == 0) return;
@@ -63,4 +64,5 @@ public class ControllerComponent : MonoBehaviour
         if (ColliderComponent.listChanged.Added == listChanged) temp.OnDeath += enemyDeath;
         if (ColliderComponent.listChanged.Removed == listChanged) temp.OnDeath -= enemyDeath;
     }
+
 }

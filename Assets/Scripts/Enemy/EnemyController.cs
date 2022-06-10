@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyStatsComponent : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] MovementComponent movementComponent;
@@ -9,6 +9,10 @@ public class EnemyStatsComponent : MonoBehaviour
     private Enemies enemiesStats;
     public Enemies EnemiesStats => enemiesStats;
 
+    private void Start()
+    {
+        healthComponent.OnDeath += EarnMoney;
+    }
     public void Init(Enemies enemy, Waypoints waypoints)
     {
         enemiesStats = enemy;
@@ -18,12 +22,12 @@ public class EnemyStatsComponent : MonoBehaviour
         //attackComponent.Init(damage);
     }
 
-    public void EarnMoney()
+    public void EarnMoney(HealthComponent health)
     {
         ResourceManagment.instance.EarnReward(this);
     }
     private void OnDestroy()
     {
-        
+        healthComponent.OnDeath -= EarnMoney;
     }
 }
