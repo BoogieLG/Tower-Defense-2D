@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourceManagment : MonoBehaviour
+public class InGameResourceManagment : MonoBehaviour
 {
-    public static ResourceManagment instance;
+    public static InGameResourceManagment instance;
     [SerializeField] private int money;
     [SerializeField] Text text;
     public int Money { get => money; }

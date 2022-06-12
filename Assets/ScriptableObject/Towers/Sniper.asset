@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed442a2e1a6ea344db65a50dbc119da6, type: 3}
-  m_Name: Minigun_2
+  m_Name: Sniper
   m_EditorClassIdentifier: 
-  towerName: Minigun
-  levelOfTower: 2
-  towerCost: 200
-  damage: 4
-  fireRate: 300
+  towerName: Sniper
+  levelOfTower: 1
+  towerCost: 100
+  damage: 100
+  fireRate: 15
   bulletSpeed: 0.2
-  bulletType: 0
-  colliderRadius: 3
+  bulletType: 2
+  colliderRadius: 10
   towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a,
     type: 3}
-  sprite: {fileID: 21300000, guid: 213306fd7982b5147ada97c506f34604, type: 3}
-  nextTowerForUpgrade: {fileID: 11400000, guid: c6f90265b856e1c4ba002593cc0861b0,
-    type: 2}
-  audioMakeFire: {fileID: 8300000, guid: d440c9f7407a04474bf738520785306b, type: 3}
+  sprite: {fileID: 21300000, guid: 4f585732f635a5840a87447c44af51c9, type: 3}
+  nextTowerForUpgrade: {fileID: 0}
+  audioMakeFire: {fileID: 8300000, guid: f7f2b958b23574551b561f7e871a8306, type: 3}
   fireEffect: {fileID: 0}

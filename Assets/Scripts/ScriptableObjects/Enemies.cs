@@ -8,7 +8,7 @@ public class Enemies : ScriptableObject
 {
     public string EnemyName;
     public string Description;
-    public int Damage;
+    public int DamageToBase;
     public int Reward;
     public float Health;
     public float MovementSpeed;

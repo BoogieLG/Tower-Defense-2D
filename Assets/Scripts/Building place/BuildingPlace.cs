@@ -30,9 +30,9 @@ public class BuildingPlace : MonoBehaviour, IPointerClickHandler
         if (spawnedTower != null) Destroy(spawnedTower.gameObject);
         Vector3 pos = new Vector3(transform.position.x, transform.position.y, -0.5f);
         GameObject temp = Instantiate(tower.towerToSpawn, pos, Quaternion.identity);
-        temp.GetComponent<ControllerComponent>().Init(tower);
         spawnedTower = temp.GetComponent<ControllerComponent>();
-        ResourceManagment.instance.UseMoney(spawnedTower);
+        spawnedTower.Init(tower);
+        InGameResourceManagment.instance.UseMoney(spawnedTower);
         placeEmpty = false;
         nodeUI.CloseAllWindows();
         if (AudioSingletone.instance) AudioSingletone.instance.PlaySound(audioBuildedTower);
@@ -41,13 +41,13 @@ public class BuildingPlace : MonoBehaviour, IPointerClickHandler
 
     public bool CheckIfEnoughMoney(Towers tower)
     {
-        if (ResourceManagment.instance.Money >= tower.towerCost) return true;
+        if (InGameResourceManagment.instance.Money >= tower.towerCost) return true;
         return false;
     }
 
     public void SellTower()
     {
-        ResourceManagment.instance.SellTower(spawnedTower);
+        InGameResourceManagment.instance.SellTower(spawnedTower);
         Destroy(spawnedTower.gameObject);
         spawnedTower = null;
         placeEmpty = true;

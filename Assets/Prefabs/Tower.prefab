@@ -76,8 +76,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0.9811321, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,10 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34a763e03c4560409144bfa305b154c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  bulletSpeed: 0
-  fireRate: 0
-  partical: {fileID: 0}
 --- !u!114 &-2614999279798759522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +130,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   colliders: {fileID: -2614999279798759522}
   circleCollider: {fileID: 3435412333053906584}
+  spriteRenderer: {fileID: 82094474261389038}
 --- !u!58 &3435412333053906584
 CircleCollider2D:
   m_ObjectHideFlags: 0

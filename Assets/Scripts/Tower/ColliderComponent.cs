@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ColliderComponent : MonoBehaviour, IComparer<HealthComponent>
 {
 
-    [SerializeField] private List<HealthComponent> collidersInRadius;
-    public List<HealthComponent> CollidersInRadius
+    [SerializeField] protected List<HealthComponent> collidersInRadius;
+    public virtual List<HealthComponent> CollidersInRadius
     {
         get
         {
@@ -32,32 +33,32 @@ public class ColliderComponent : MonoBehaviour, IComparer<HealthComponent>
         {
             collidersInRadius.Add(healthComponent);
             OnChangedList?.Invoke(healthComponent, listChanged.Added);
-}
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
-{
-    HealthComponent temp = collider.GetComponent<HealthComponent>();
-    RemoveFromList(temp);
-}
-
-public void RemoveFromList(HealthComponent temp)
-{
-    collidersInRadius.Remove(temp);
-    OnChangedList?.Invoke(temp, listChanged.Removed);
-    OnRemovedFromList?.Invoke(temp);
-}
-
-public int Compare(HealthComponent x, HealthComponent y)
-{
-    if (x.CurrentHealth > y.CurrentHealth)
+    protected void OnTriggerExit2D(Collider2D collider)
     {
-        return 1;
+        HealthComponent temp = collider.GetComponent<HealthComponent>();
+        RemoveFromList(temp);
     }
-    else if (x.CurrentHealth < y.CurrentHealth)
+
+    public void RemoveFromList(HealthComponent temp)
     {
-        return -1;
+        collidersInRadius.Remove(temp);
+        OnChangedList?.Invoke(temp, listChanged.Removed);
+        OnRemovedFromList?.Invoke(temp);
     }
-    return 0;
-}
+
+    public virtual int Compare(HealthComponent x, HealthComponent y)
+    {
+        if (x.CurrentHealth > y.CurrentHealth)
+        {
+            return 1;
+        }
+        else if (x.CurrentHealth < y.CurrentHealth)
+        {
+            return -1;
+        }
+        return 0;
+    }
 }

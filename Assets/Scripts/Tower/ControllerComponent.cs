@@ -11,6 +11,7 @@ public class ControllerComponent : MonoBehaviour
     [SerializeField] private HealthComponent currentTarget;
     [SerializeField] private ColliderComponent colliders;
     [SerializeField] private CircleCollider2D circleCollider;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private void Start()
     {
         colliders.OnRemovedFromList += checkTarget;
@@ -28,6 +29,7 @@ public class ControllerComponent : MonoBehaviour
         this.tower = tower;
         attackComponent.Init(tower);
         circleCollider.radius = tower.colliderRadius;
+        spriteRenderer.sprite = tower.sprite;
     }
     private void Update()
     {
@@ -43,13 +45,27 @@ public class ControllerComponent : MonoBehaviour
     }
 
 
-    private void makeNewTarget()
+    private  void makeNewTarget()
     {
         currentTarget = null;
         if (colliders.CollidersInRadius.Count == 0) return;
-        currentTarget = colliders.CollidersInRadius[0];
-    }
+        if (tower.bulletType == BulletType.Sniper)
+        {
+            int index = makeSniperTarget();
+            if (index == -1) currentTarget = colliders.CollidersInRadius[0];
+            else currentTarget = colliders.CollidersInRadius[index];
+        }
+        else
+        {
+            currentTarget = colliders.CollidersInRadius[0];
+        }
 
+    }
+    private int makeSniperTarget()
+    {
+        int index = colliders.CollidersInRadius.FindIndex(t => t.enemyType == EnemyType.heavy);
+        return index;
+    }
     private void enemyDeath(HealthComponent temp)
     {
         colliders.RemoveFromList(temp);

@@ -22,7 +22,7 @@ MonoBehaviour:
   colliderRadius: 9
   towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a,
     type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: eb4339110977259468d8ee7198eca7b7, type: 3}
   nextTowerForUpgrade: {fileID: 0}
   audioMakeFire: {fileID: 8300000, guid: ce02cc583b9d84102a12a156e90ca692, type: 3}
   fireEffect: {fileID: 0}

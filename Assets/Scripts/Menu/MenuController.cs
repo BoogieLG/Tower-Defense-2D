@@ -32,7 +32,7 @@ public class MenuController : MonoBehaviour
     {
         AudioSingletone.instance.PlaySound("UIPressed");
         SetCurrentScreen(Screen.Loading);
-        LoadingScreen.instance.LoadScene("Level-1");
+        LoadingScreen.instance.LoadScene("Level 1");
     }
 
     public void OpenSettingMenu()

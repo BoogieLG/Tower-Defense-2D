@@ -18,10 +18,12 @@ MonoBehaviour:
   damage: 2
   fireRate: 300
   bulletSpeed: 0.2
+  bulletType: 0
   colliderRadius: 3
   towerToSpawn: {fileID: 82094474261389032, guid: ecc7cf9d7ef8e9b40853a36e02dbcd2a,
     type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: a3133e259187c424ab39bd34097a1f05, type: 3}
   nextTowerForUpgrade: {fileID: 11400000, guid: c0c097ca52d968b47bac3f4d2725844a,
     type: 2}
   audioMakeFire: {fileID: 8300000, guid: d440c9f7407a04474bf738520785306b, type: 3}
+  fireEffect: {fileID: 0}

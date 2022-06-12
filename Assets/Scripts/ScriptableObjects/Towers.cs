@@ -17,3 +17,9 @@ public class Towers : ScriptableObject
     public AudioClip audioMakeFire;
     public ParticleSystem fireEffect;
 }
+public enum BulletType
+{
+    Fast,
+    Rocket,
+    Sniper
+}

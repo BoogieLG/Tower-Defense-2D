@@ -65,8 +65,4 @@ public class ObjectPooler : MonoBehaviour
         return objectToSpawn;
     }
 }
-public enum BulletType
-{
-    Fast,
-    Rocket
-}
+

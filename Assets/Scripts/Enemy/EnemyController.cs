@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
 
     public void EarnMoney(HealthComponent health)
     {
-        ResourceManagment.instance.EarnReward(this);
+        InGameResourceManagment.instance.EarnReward(this);
     }
     private void OnDestroy()
     {

@@ -7,9 +7,9 @@ public class MainBase : MonoBehaviour
     [SerializeField] private int BaseHealth;
     private void OnTriggerEnter(Collider other)
     {
-      if(other.TryGetComponent<AttackComponent>(out AttackComponent attackComponent))
+      if(other.TryGetComponent<EnemyController>(out EnemyController enemyController))
         {
-            BaseHealth -= (int)attackComponent.Damage;
+            BaseHealth -= enemyController.EnemiesStats.DamageToBase;
             if (BaseHealth <= 0)
             {
                 Debug.Log("GameOVer");
