@@ -33,6 +33,7 @@ public class SaveLoadRepository : MonoBehaviour
     public Data Load()
     {
         data = jsonData.Load(Path.Combine(path, fileName));
+        if (data == null) return null;
         Debug.Log($"Loaded: {data.amountOfMoney}");
         return data;
     }

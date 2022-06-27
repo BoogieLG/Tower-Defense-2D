@@ -6,9 +6,11 @@ public class SaveLoadData : MonoBehaviour
 {
     public static SaveLoadData instance { get; private set; }
 
-    public Data data;
-    public Text mainMenuWindow;
+    private Data data;
+
     private SaveLoadRepository saveLoadRepository;
+
+    public Action<Data> loadedNewData;
 
     private void Awake()
     {
@@ -24,46 +26,22 @@ public class SaveLoadData : MonoBehaviour
     {
         saveLoadRepository = new SaveLoadRepository();
         Load();
-        AddAllDelegates();
-        changeText();
-    }
-
-    private void AddAllDelegates()
-    {
-        changedDataAlerm += changeText;
-    }
-    private void DeleteAllDelegates()
-    {
-        changedDataAlerm -= changeText;
     }
 
     [ContextMenu("Save")]
-    public void Save()
+    private void Save()
     {
         saveLoadRepository.Save(data);
     }
     [ContextMenu("Load")]
-    public void Load()
+    private void Load()
     {
         data = saveLoadRepository.Load();
-    }
-    public Action changedDataAlerm; 
-    public void ChangeData(Data data)
-    {
-        this.data = data;
-        Save();
-        changedDataAlerm.Invoke();
-    }
-    private void changeText()
-    {
-        if (mainMenuWindow)
+        if (data == null)
         {
-            mainMenuWindow.text = data.ToString();
+            Debug.Log("No recods found, created new.");
+            data = new Data();
         }
-    }
-
-    private void OnDestroy()
-    {
-        DeleteAllDelegates();
+        loadedNewData.Invoke(data);
     }
 }

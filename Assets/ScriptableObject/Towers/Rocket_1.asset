@@ -15,7 +15,7 @@ MonoBehaviour:
   towerName: Rocket_1
   levelOfTower: 1
   towerCost: 200
-  damage: 50
+  damage: 10
   fireRate: 30
   bulletSpeed: 0.05
   bulletType: 1

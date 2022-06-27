@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public struct Data
+public class Data
 {
     public float amountOfMoney;
 

@@ -17,6 +17,7 @@ public class WaveSpawn : MonoBehaviour
     [SerializeField] private Text wavesCount;
 
     [SerializeField] private List<Wave> waves;
+    [SerializeField] private List<GameObject> lastEnemies;
     private int currentWave;
     private bool nextWave;
 
@@ -32,25 +33,44 @@ public class WaveSpawn : MonoBehaviour
         if (currentWave == waves.Count)
         {
             timeCountWave.text = "Last wave!";
+            checkForLastEnemy();
+            return;
+        }
+        if (currentWave == waves.Count   )
+        {
+            checkForLastEnemy();
             return;
         }
         if (countdown <= 0f)
         {
+            checkForLastEnemy();
             if (!nextWave) return;
             spawnNextWave();
             nextWave = false;
-            countdown = timeBetweenWaves;
+
         }
+        
         timeCountWave.text = "Next Wave in " + Mathf.Round(countdown).ToString();
         countdown -= Time.deltaTime;
-    }
 
-    private void spawnNextWave()
+    }
+    private void checkForLastEnemy()
     {
+
+        for (int i = lastEnemies.Count - 1; i >= 0; i--)
+        {
+            if (lastEnemies[i] == null) lastEnemies.Remove(lastEnemies[i]);
+            else Debug.Log(lastEnemies[i]);
+        }
+
+    }
+    private void spawnNextWave()
+    { 
         if (currentWave <= waves.Count-1)
         {
             StartCoroutine(spawnNextEnemy(waves[currentWave]));
         }
+        countdown = waves[currentWave].TimeToNextWave;
         currentWave++;
         changeInfo();
 
@@ -65,7 +85,8 @@ public class WaveSpawn : MonoBehaviour
             tempEnemy.GetComponent<EnemyController>().Init(enemy,wayPath);
             tempEnemy.transform.SetParent(enemiesPanel);
             changeInfo();
-            yield return new WaitForSeconds(wave.TimeBetweenSpawn);
+            lastEnemies.Add(tempEnemy);
+            yield return new WaitForSeconds(wave.TimeBetweenEnemiesSpawn);
 
         }
         nextWave = true;
@@ -81,6 +102,7 @@ public class WaveSpawn : MonoBehaviour
 [Serializable]
 public class Wave
 {
-    public float TimeBetweenSpawn;
+    public float TimeBetweenEnemiesSpawn = 0.5f;
+    public float TimeToNextWave = 20f;
     public List<Enemies> enemies;
 }

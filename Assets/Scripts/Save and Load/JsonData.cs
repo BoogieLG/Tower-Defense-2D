@@ -15,8 +15,13 @@ public class JsonData
 
     public Data Load(string path)
     {
-        var str = File.ReadAllText(path);
-        return JsonUtility.FromJson<Data>(str);
+        if (File.Exists(path))
+        {
+            var str = File.ReadAllText(path);
+
+            return JsonUtility.FromJson<Data>(str);
+        }
+        return null;
     }
 
 }

@@ -242,11 +242,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1285812559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7daf752d6c86b4c83db310e1b978f1, type: 3}
+  m_Script: {fileID: 11500000, guid: e0f2818627722794eaf92ce71d7b0902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    amountOfMoney: 0
+    amountOfMoney: 3
 --- !u!4 &1285812561
 Transform:
   m_ObjectHideFlags: 0
