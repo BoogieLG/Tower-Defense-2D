@@ -27,6 +27,7 @@ public class UINode : MonoBehaviour
 
     public void CloseAllWindows()
     {
+        if (PanZoom.instance.IsPanningZooming) return;
         TowerBuyWindow.SetActive(false);
         TowerModifyWindow.SetActive(false);
         CloseButtonCanvas.SetActive(false);
