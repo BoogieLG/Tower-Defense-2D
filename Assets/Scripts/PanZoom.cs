@@ -5,6 +5,7 @@ public class PanZoom : MonoBehaviour
     private Vector3 touchStart;
     public float zoomOutMin = 2;
     public float zoomOutMax = 8;
+    public float zoomingSpeed = 2;
     public bool IsPanningZooming = false;
     public static PanZoom instance { get; private set; }
 
@@ -55,7 +56,7 @@ public class PanZoom : MonoBehaviour
 
     private void zoom(float increment)
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment*zoomingSpeed, zoomOutMin, zoomOutMax);
         IsPanningZooming = true;
     }
 }
